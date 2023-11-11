@@ -13,7 +13,6 @@ let started = false;
 // Counter for user clicks in the current level
 let userClickCounter = 0;
 
-
 document.getElementById("green").addEventListener("click", function () {
   handleUserClick("green");
 });
@@ -39,3 +38,13 @@ function handleUserClick(color) {
   gameStarted();
 }
 
+function pressedAnimationAndSound(color) {
+  document.getElementById(color).classList.add("pressed");
+
+  setTimeout(function () {
+    document.getElementById(color).classList.remove("pressed");
+  }, 50);
+
+  const audio = new Audio("./sounds/" + color + ".mp3");
+  audio.play();
+}
