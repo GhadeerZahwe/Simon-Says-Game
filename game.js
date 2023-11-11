@@ -48,3 +48,19 @@ function pressedAnimationAndSound(color) {
   const audio = new Audio("./sounds/" + color + ".mp3");
   audio.play();
 }
+
+
+// Function to handle game status
+function gameStarted() {
+  // If the game hasn't started, initialize and start the first level
+  if (!started) {
+    document.getElementById("level-title").innerText = "Level " + 1;
+    setTimeout(function () {
+      nextLevel();
+    }, 500);
+    started = true;
+  } else {
+    // Check the user's answer if the game has started
+    checkAnswer();
+  }
+}
