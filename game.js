@@ -105,3 +105,15 @@ function checkAnswer() {
     }
   }
 }
+
+
+// Function to restart the game
+function restart() {
+  level = 0;
+  started = false;
+  userClickCounter = 0;
+
+  // Clear game pattern and user clicked pattern arrays
+  gamePattern.length = 0;
+  userClickedPattern.length = 0;
+}
