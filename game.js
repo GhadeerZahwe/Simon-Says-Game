@@ -117,3 +117,19 @@ function restart() {
   gamePattern.length = 0;
   userClickedPattern.length = 0;
 }
+
+
+// Function to handle game over
+function gameOver() {
+  // Play a wrong sound
+  const audio = new Audio("./sounds/wrong.mp3");
+  audio.play();
+  document.body.classList.add("game-over");
+
+  // Remove game-over style after a short delay
+  setTimeout(function () {
+    document.body.classList.remove("game-over");
+  }, 50);
+  document.getElementById("level-title").innerText = "Game Over, Press Any Key to Restart";
+  restart();
+}
