@@ -29,3 +29,13 @@ document.getElementById("yellow").addEventListener("click", function () {
 document.getElementById("blue").addEventListener("click", function () {
   handleUserClick("blue");
 });
+
+function handleUserClick(color) {
+  pressedAnimationAndSound(color);
+  if (started) {
+    userClickedPattern.push(color);
+    userClickCounter++;
+  }
+  gameStarted();
+}
+
