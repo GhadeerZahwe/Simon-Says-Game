@@ -13,32 +13,44 @@ let started = false;
 // Counter for user clicks in the current level
 let userClickCounter = 0;
 
+// Event listener for the green button click
 document.getElementById("green").addEventListener("click", function () {
   handleUserClick("green");
 });
 
+// Event listener for the red button click
 document.getElementById("red").addEventListener("click", function () {
   handleUserClick("red");
 });
 
+// Event listener for the yellow button click
 document.getElementById("yellow").addEventListener("click", function () {
   handleUserClick("yellow");
 });
 
+// Event listener for the blue button click
 document.getElementById("blue").addEventListener("click", function () {
   handleUserClick("blue");
 });
 
+// Function to handle user clicks
 function handleUserClick(color) {
+  // Apply animation and sound for the clicked color
   pressedAnimationAndSound(color);
+
+  // If the game has started, record the user's click and increment the counter
   if (started) {
     userClickedPattern.push(color);
     userClickCounter++;
   }
+
+  // Check the game status
   gameStarted();
 }
 
+// Function to apply animation and sound for a color
 function pressedAnimationAndSound(color) {
+  // Add a class for the pressed animation
   document.getElementById(color).classList.add("pressed");
 
   setTimeout(function () {
@@ -49,10 +61,8 @@ function pressedAnimationAndSound(color) {
   audio.play();
 }
 
-
 // Function to handle game status
 function gameStarted() {
-  // If the game hasn't started, initialize and start the first level
   if (!started) {
     document.getElementById("level-title").innerText = "Level " + 1;
     setTimeout(function () {
@@ -60,11 +70,9 @@ function gameStarted() {
     }, 500);
     started = true;
   } else {
-    // Check the user's answer if the game has started
     checkAnswer();
   }
 }
-
 
 // Array to store the game pattern
 const gamePattern = [];
@@ -72,29 +80,26 @@ const gamePattern = [];
 function nextLevel() {
   level++;
   document.getElementById("level-title").innerText = "Level " + level;
-  // Generate a random color for the game pattern
+
   const randomNumber = Math.floor(Math.random() * 4);
   const randomColor = buttonColors[randomNumber];
+
   gamePattern.push(randomColor);
 
   pressedAnimationAndSound(randomColor);
+
   userClickCounter = 0;
 }
 
-
-// Function to check if the user's answer is correct
 function checkAnswer() {
   if (userClickedPattern.length === gamePattern.length) {
     if (JSON.stringify(gamePattern) === JSON.stringify(userClickedPattern)) {
-      // Move to the next level after a delay
       setTimeout(function () {
         nextLevel();
       }, 1000);
 
-      // Clear the user's clicked pattern array
       userClickedPattern.length = 0;
     } else {
-      // If patterns don't match, end the game
       gameOver();
     }
   } else {
@@ -106,27 +111,19 @@ function checkAnswer() {
   }
 }
 
-
-// Function to restart the game
 function restart() {
   level = 0;
   started = false;
   userClickCounter = 0;
 
-  // Clear game pattern and user clicked pattern arrays
   gamePattern.length = 0;
   userClickedPattern.length = 0;
 }
 
-
-// Function to handle game over
 function gameOver() {
-  // Play a wrong sound
   const audio = new Audio("./sounds/wrong.mp3");
   audio.play();
   document.body.classList.add("game-over");
-
-  // Remove game-over style after a short delay
   setTimeout(function () {
     document.body.classList.remove("game-over");
   }, 50);
@@ -134,6 +131,7 @@ function gameOver() {
   restart();
 }
 
+// Event listener for keypress to restart the game
 document.addEventListener("keypress", function () {
   restart();
   gameStarted();
