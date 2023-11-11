@@ -65,17 +65,13 @@ function pressedAnimationAndSound(color) {
 
 // Function to handle game status
 function gameStarted() {
-  // If the game hasn't started, initialize and start the first level
   if (!started) {
     document.getElementById("level-title").innerText = "Level " + 1;
     setTimeout(function () {
       nextLevel();
     }, 500);
     started = true;
-  } else {
-    // Check the user's answer if the game has started
-    checkAnswer();
-  }
+  } 
 }
 
 // Array to store the game pattern
