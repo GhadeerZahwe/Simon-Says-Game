@@ -133,3 +133,8 @@ function gameOver() {
   document.getElementById("level-title").innerText = "Game Over, Press Any Key to Restart";
   restart();
 }
+
+document.addEventListener("keypress", function () {
+  restart();
+  gameStarted();
+});
