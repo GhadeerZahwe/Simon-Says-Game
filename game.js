@@ -152,16 +152,6 @@ function gameOver() {
   // Apply game-over style to the body
   document.body.classList.add("game-over");
 
-  // Remove game-over style after a short delay
-  setTimeout(function () {
-    document.body.classList.remove("game-over");
-  }, 50);
-
-  // Display game-over message
-  document.getElementById("level-title").innerText =
-    "Game Over, Press Any Key to Restart";
-
-  // Restart the game
   restart();
 }
 
