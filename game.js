@@ -80,3 +80,28 @@ function nextLevel() {
   pressedAnimationAndSound(randomColor);
   userClickCounter = 0;
 }
+
+
+// Function to check if the user's answer is correct
+function checkAnswer() {
+  if (userClickedPattern.length === gamePattern.length) {
+    if (JSON.stringify(gamePattern) === JSON.stringify(userClickedPattern)) {
+      // Move to the next level after a delay
+      setTimeout(function () {
+        nextLevel();
+      }, 1000);
+
+      // Clear the user's clicked pattern array
+      userClickedPattern.length = 0;
+    } else {
+      // If patterns don't match, end the game
+      gameOver();
+    }
+  } else {
+    for (let i = 0; i < userClickedPattern.length; i++) {
+      if (userClickedPattern[i] !== gamePattern[i]) {
+        gameOver();
+      }
+    }
+  }
+}
