@@ -12,3 +12,20 @@ let started = false;
 
 // Counter for user clicks in the current level
 let userClickCounter = 0;
+
+
+document.getElementById("green").addEventListener("click", function () {
+  handleUserClick("green");
+});
+
+document.getElementById("red").addEventListener("click", function () {
+  handleUserClick("red");
+});
+
+document.getElementById("yellow").addEventListener("click", function () {
+  handleUserClick("yellow");
+});
+
+document.getElementById("blue").addEventListener("click", function () {
+  handleUserClick("blue");
+});
