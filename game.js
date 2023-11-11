@@ -64,3 +64,19 @@ function gameStarted() {
     checkAnswer();
   }
 }
+
+
+// Array to store the game pattern
+const gamePattern = [];
+
+function nextLevel() {
+  level++;
+  document.getElementById("level-title").innerText = "Level " + level;
+  // Generate a random color for the game pattern
+  const randomNumber = Math.floor(Math.random() * 4);
+  const randomColor = buttonColors[randomNumber];
+  gamePattern.push(randomColor);
+
+  pressedAnimationAndSound(randomColor);
+  userClickCounter = 0;
+}
