@@ -28,11 +28,14 @@ document.getElementById("yellow").addEventListener("click", function () {
   handleUserClick("yellow");
 });
 
+// Event listener for the blue button click
 document.getElementById("blue").addEventListener("click", function () {
   handleUserClick("blue");
 });
 
+// Function to handle user clicks
 function handleUserClick(color) {
+  // Apply animation and sound for the clicked color
   pressedAnimationAndSound(color);
 
   // If the game has started, record the user's click and increment the counter
@@ -45,7 +48,9 @@ function handleUserClick(color) {
   gameStarted();
 }
 
+// Function to apply animation and sound for a color
 function pressedAnimationAndSound(color) {
+  // Add a class for the pressed animation
   document.getElementById(color).classList.add("pressed");
 
   // Remove the class after a short delay for animation
@@ -68,6 +73,7 @@ function gameStarted() {
     }, 500);
     started = true;
   } else {
+    // Check the user's answer if the game has started
     checkAnswer();
   }
 }
@@ -80,8 +86,10 @@ function nextLevel() {
   // Increment the level
   level++;
 
+  // Update the displayed level
   document.getElementById("level-title").innerText = "Level " + level;
 
+  // Generate a random color for the game pattern
   const randomNumber = Math.floor(Math.random() * 4);
   const randomColor = buttonColors[randomNumber];
 
@@ -95,14 +103,18 @@ function nextLevel() {
   userClickCounter = 0;
 }
 
+// Function to check if the user's answer is correct
 function checkAnswer() {
+  // Check if the user's pattern length matches the game pattern length
   if (userClickedPattern.length === gamePattern.length) {
+    // Check if the user's pattern matches the game pattern
     if (JSON.stringify(gamePattern) === JSON.stringify(userClickedPattern)) {
       // Move to the next level after a delay
       setTimeout(function () {
         nextLevel();
       }, 1000);
 
+      // Clear the user's clicked pattern array
       userClickedPattern.length = 0;
     } else {
       // If patterns don't match, end the game
@@ -119,18 +131,28 @@ function checkAnswer() {
   }
 }
 
+// Function to restart the game
 function restart() {
+  // Reset game-related variables
   level = 0;
   started = false;
   userClickCounter = 0;
+
+  // Clear game pattern and user clicked pattern arrays
   gamePattern.length = 0;
   userClickedPattern.length = 0;
 }
 
+// Function to handle game over
 function gameOver() {
+  // Play a wrong sound
   const audio = new Audio("./sounds/wrong.mp3");
   audio.play();
+
+  // Apply game-over style to the body
   document.body.classList.add("game-over");
+
+  // Remove game-over style after a short delay
   setTimeout(function () {
     document.body.classList.remove("game-over");
   }, 50);
